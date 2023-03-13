@@ -1,0 +1,41 @@
+function size(obj){
+    return Object.keys(obj).length
+}
+
+
+var questao = ["What have I learned today?", "Can I improve tommorow", "Have I done my meditation session", "Have I ate my lunch", "Do I like to play LOL"]
+var questaolag = size(questao)
+
+var ask = (index = 0) =>{
+    
+    process.stdout.write(questao[index] + "\n")
+    
+
+}
+
+ask()
+
+var resposta = []
+process.stdin.on('data', data => {
+    
+    resposta.push(data.toString().trim())
+    var respostalag = size(resposta)
+    if(respostalag<questaolag){
+        
+        ask(respostalag)
+        
+    }else{
+        console.log(resposta + '\n\n')
+        process.exit()
+    }  
+    
+});
+
+process.on('exit', () => {
+    console.log(`This is what I learned today ${resposta[0]}\n\n\n
+    Am I able to improve tommorow ${resposta[1]}\n\n\n
+    What about my meditation ${resposta[2]}\n\n\n
+    And my lunch ${resposta[3]}\n\n\n
+    And about video games LOL did I play it ${resposta[4]}\n\n\n`)
+
+});
